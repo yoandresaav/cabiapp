@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'justobalancer-1394164162.us-east-2.elb.amazonaws.com',
-    'ec2-52-15-255-253.us-east-2.compute.amazonaws.com'
+    'ec2-52-15-255-253.us-east-2.compute.amazonaws.com',
+    'localhost'
 ]
 
 
