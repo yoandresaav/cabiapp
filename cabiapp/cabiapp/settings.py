@@ -25,10 +25,10 @@ SECRET_KEY = '$65yqqyo@e2om%jck7nh$znw3b-)%cz3t(j@$t&9(hg2udq5y='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'justobalancer-1394164162.us-east-2.elb.amazonaws.com',
+ALLOWED_HOSTS = [    
     'ec2-52-15-255-253.us-east-2.compute.amazonaws.com',
-    'localhost'
+    'localhost',
+    'reportecabifeet.sytes.net'
 ]
 
 
