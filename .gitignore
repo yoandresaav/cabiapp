@@ -1,1 +1,4 @@
 *.sqlite3
+*.pid
+*.pyc
+__pycache__
