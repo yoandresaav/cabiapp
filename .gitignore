@@ -2,3 +2,4 @@
 *.pid
 *.pyc
 __pycache__
+production.cfg
