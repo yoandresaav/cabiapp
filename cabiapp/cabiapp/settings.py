@@ -95,11 +95,11 @@ WSGI_APPLICATION = 'cabiapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATA_BASES_ENGINE = config.get('databases', 'DATA_BASES_ENGINE'),
-DATA_BASES_NAME   = config.get('databases', 'DATA_BASES_NAME'),
+DATA_BASES_ENGINE = config.get('databases', 'DATA_BASES_ENGINE')
+DATA_BASES_NAME   = config.get('databases', 'DATA_BASES_NAME')
 
 if DEBUG:
-    DATA_BASES_NAME = os.path.join(BASE_DIR, DATA_BASES_NAME[0])
+    DATA_BASES_NAME = os.path.join(BASE_DIR, DATA_BASES_NAME)
 
 DATABASES = {
     'default': {
