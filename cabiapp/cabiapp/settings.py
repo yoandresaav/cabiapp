@@ -2,16 +2,29 @@
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SETTINGS_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+SETTINGS_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 from django.utils.six.moves import configparser
 config = configparser.SafeConfigParser(allow_no_value=True)
-config.read('%s/production.cfg' % (SETTINGS_DIR))
+
+# Import socket to read host name
+import socket
+
+# If the host name starts with 'MacBook', load configparser from "production.cfg"
+if socket.gethostname().startswith('MacBook'):
+    DEBUG = True
+    # In other project use a debug config file
+    config.read('%s/production.cfg' % (SETTINGS_DIR))
+# If the host name starts with 'othe', load configparser from "production.cfg"
+else:
+    DEBUG = False
+    config.read('%s/production.cfg' % (SETTINGS_DIR))
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config.get('security', 'SECRET_KEY')
@@ -32,12 +45,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'debug_toolbar',
     'crispy_forms',
     
     # User app
     'web_site',
 ]
+
+if DEBUG:
+    INSTALLED_APPS.append(
+        'debug_toolbar',
+    )
+    # if delete this the toolbar not show
+    INTERNAL_IPS = ('127.0.0.1',)
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -76,10 +95,16 @@ WSGI_APPLICATION = 'cabiapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+DATA_BASES_ENGINE = config.get('databases', 'DATA_BASES_ENGINE'),
+DATA_BASES_NAME   = config.get('databases', 'DATA_BASES_NAME'),
+
+if DEBUG:
+    DATA_BASES_NAME = os.path.join(BASE_DIR, DATA_BASES_NAME[0])
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': DATA_BASES_ENGINE,
+        'NAME': DATA_BASES_NAME,
     }
 }
 
