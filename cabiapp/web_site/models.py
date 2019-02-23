@@ -27,7 +27,7 @@ class ReporteProductividad(models.Model):
         (domingo, 'Domingo'),
     )
 
-    placa = models.ForeignKey(Placa, on_delete=models.SET_NULL, null=True, blank=True)
+    placa = models.ForeignKey(Placa, on_delete=models.SET_NULL, null=True)
     dia = models.CharField('Día que reporta', max_length=10, choices=DIAS_REPORTE)
 
     numero_viajes = models.PositiveIntegerField('Cantidad de Viajes')
