@@ -1,4 +1,5 @@
 
+# url in http://reportecabifeet.sytes.net/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -51,13 +52,6 @@ INSTALLED_APPS = [
     'web_site',
 ]
 
-if DEBUG:
-    INSTALLED_APPS.append(
-        'debug_toolbar',
-    )
-    # if delete this the toolbar not show
-    INTERNAL_IPS = ('127.0.0.1',)
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
@@ -68,7 +62,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'cabiapp.urls'
@@ -91,6 +84,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cabiapp.wsgi.application'
 
+if DEBUG:
+    # Config debug tools 
+    INSTALLED_APPS.append(
+        'debug_toolbar',
+    )
+    # if delete this the toolbar not show
+    INTERNAL_IPS = ('127.0.0.1',)
+    MIDDLEWARE.append(
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
