@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import ReporteProductividad
 
@@ -17,5 +17,6 @@ class ThanksView(TemplateView):
     template_name = 'web_site/end.html'
 
 
-class SuperAdminView(LoginRequiredMixin, TemplateView):
+class SuperAdminView(LoginRequiredMixin, ListView):
     template_name = 'web_site/super_admin.html'
+    model = ReporteProductividad

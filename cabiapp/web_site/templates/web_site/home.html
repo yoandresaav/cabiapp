@@ -3,12 +3,18 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
-
-  <form method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn  btn-lg btn-success">Enviar</button>
-  </form>
+  <div class="row justify-content-center">
+    <div class="col">
+      <h1 class="mt-2">
+        Reporte de Productividad
+      </h1>
+      <hr class="mt-0 mb-4">
+        <form method="post">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button type="submit" class="btn  btn-lg btn-success">Enviar</button>
+        </form>
+    </div>
+  </div>
 {% endblock content %}
     
