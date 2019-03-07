@@ -1,8 +1,11 @@
 <!doctype html>
 <html lang="en">
+  {% load static %}
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{% static 'logocabliflet.png' %}" type="image/png" />
+    <link rel="shortcut icon" href="{% static 'logocabliflet.png' %}" type="image/png" />
     <title>Reporte</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -10,53 +13,70 @@
     {% endblock styles %}      
   </head>
   <body>
-      <header>
-          <div class="collapse bg-dark" id="navbarHeader">
-            <div class="container">
-              <div class="row">
-                <div class="col-sm-8 col-md-7 py-4">
-                  <h4 class="text-white">Esta página</h4>
-                  <p class="text-muted">Esta página esta destinada a personal administrativo.</p>
-                </div>
-                <div class="col-sm-4 offset-md-1 py-4">
-                  <h4 class="text-white">Enlaces</h4>
-                  <ul class="list-unstyled">
-                    {% if user.is_authenticated %}
-                      <li><a href="{% url 'logout' %}" class="text-white">Salir</a></li>
-                    {% else %}
-                      <li><a href="{% url 'web_site:admin_page' %}" class="text-white">Ver Reportes</a></li>
-                    {% endif %}
-                  </ul>
+    
+    {% block header %}
+    <section id="header">
+        <header>
+            <div class="collapse bg-dark" id="navbarHeader">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-8 col-md-7 py-4">
+                    <h4 class="text-white">Menu superior</h4>
+                    <p class="text-muted">Este menú esta destinada a personal administrativo.</p>
+                  </div>
+                  <div class="col-sm-4 offset-md-1 py-4">
+                    <h4 class="text-white">Enlaces</h4>
+                    <ul class="list-unstyled">
+                      {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}" class="text-white">Salir</a></li>
+                      {% else %}
+                        <li><a href="{% url 'web_site:admin_page' %}" class="text-white">Ver Reportes</a></li>
+                      {% endif %}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="navbar navbar-dark bg-dark shadow-sm">
-            <div class="container d-flex justify-content-between">
-              <a href="{% url 'web_site:createreporte_page' %}" class="navbar-brand d-flex align-items-center">
-                <i class="fa fa-car" aria-hidden="true"></i>
-                <strong class="ml-2">Reportes</strong>
-              </a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
+            <!--Menu-->
+            <div class="navbar navbar-dark bg-dark shadow-sm">
+              <div class="container d-flex justify-content-between">
+                <a href="{% url 'web_site:createreporte_page' %}" class="navbar-brand d-flex align-items-center">
+                  <i class="fa fa-car" aria-hidden="true"></i>
+                  <strong class="ml-2">Reportes</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              </div>
             </div>
-          </div>
-        </header>
-        <main role="main">
-            <div class="container">
-                {% block content %}
-                {% endblock %}
-            </div>
-        </main>
+            <!--End Menu-->
+          </header>
+      </section>
+    {% endblock header %}
+
+    <section id="main">
+      <main role="main">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+      </main>
+    </section>
+
+    
+    {% block footer %}
+      <section id="footer">
         <footer class="text-muted mt-5">
-            <div class="container">
-              <p class="float-right">
-                <a href="#">Subir</a>
-              </p>
-              <p>{% now 'Y' %} &copy; Bananolabs</p>
-            </div>
-          </footer>
+          <div class="container">
+            <p class="float-right">
+              <a href="#">Subir</a>
+            </p>
+            <p>{% now 'Y' %} &copy; Bananolabs</p>
+          </div>
+        </footer>
+      </section>
+    {% endblock footer %}
+      
 
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

@@ -1,16 +1,62 @@
 {% extends '__base.html' %}
-
+{% load static %}
 {% load crispy_forms_tags %}
 
+
+
+{% block header %}
+{% endblock header %}
+
+{% block styles %}
+    <link rel="stylesheet"  type="text/css" href="{% static 'assets/css/signin.css' %}">
+    <style>
+        body {
+            text-align: center !important;
+        }
+       label {
+           display: none !important;
+       }
+    </style>
+{% endblock styles %}
+        
+
 {% block content %}
-Entrar
-<form method="post">
+
+    <form method="post" class="form-signin">
+        <img class="mb-4" src="{% static 'assets/image/cabifleet_all.png' %}" alt="" width="192" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Entrar</h1>
+        <label for="inputEmail" class="sr-only">Email address</label>
         {% csrf_token %}
         {{ form|crispy }}
-        <button type="submit" class="btn  btn-lg btn-success">Enviar</button>
-      </form>
+        <button type="submit" class="btn  btn-lg btn-block btn-success">Enviar</button>
+        {# Assumes you setup the password_reset view in your URLconf #}
+        <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+        <p><a href="{% url 'web_site:create_accounts_page' %}">Crear cuenta?</a></p>
+        
+    </form>
+
 
 {% endblock content %}
+
+
+{% block scripts %}
+<script>
+    $( document ).ready(function() {
+        $('#id_username').attr('placeholder', 'Usuario');
+        $("#id_username").attr("required", true);
+        //$("#id_username").addClass("sr-only");
+        $('#id_password').attr('placeholder', 'Contraseña')
+        $("#id_password").attr("required", true);
+    });
+</script>
+    
+{% endblock scripts %}
+
+    
+
+{% block footer %}
+{% endblock footer %}
+    
 
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
@@ -26,21 +72,21 @@ Entrar
 {% endif %}
 
 <form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
+        {% csrf_token %}
+        <table>
+        <tr>
+            <td>{{ form.username.label_tag }}</td>
+            <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password.label_tag }}</td>
+            <td>{{ form.password }}</td>
+        </tr>
+        </table>
+        
+        <input type="submit" value="login">
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
 
-<input type="submit" value="login">
-<input type="hidden" name="next" value="{{ next }}">
-</form>
 
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
