@@ -10,9 +10,12 @@ class Profile(models.Model):
     slug = models.UUIDField(default=uuid.uuid4, blank=True, editable=False)
     phone = models.CharField('Teléfono', max_length=13, blank=True, null=True)
 
+    def get_absolute_url(self):
+        return '/profile/{slug}'.format(slug=self.slug)
+
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
-    if created:
+    if created or not hasattr(instance, 'profile'):
         Profile.objects.create(
             user=instance
         )

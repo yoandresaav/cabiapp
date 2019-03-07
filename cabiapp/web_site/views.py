@@ -1,9 +1,10 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic import CreateView, TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
-from .models import ReporteProductividad
 from django.contrib.auth.forms import UserCreationForm
+from .models import ReporteProductividad
 
 class ReporteCreateView(LoginRequiredMixin, CreateView):
     template_name = 'web_site/home.html'
@@ -17,6 +18,10 @@ class ReporteCreateView(LoginRequiredMixin, CreateView):
 class CreateAccountsView(CreateView):
     template_name = 'web_site/accounts/create_accounts.html'
     form_class = UserCreationForm
+
+    def get_success_url(self):
+        # Go to login page
+        return reverse('web_site:createreporte_page')
 
 class ThanksView(TemplateView):
     template_name = 'web_site/end.html'

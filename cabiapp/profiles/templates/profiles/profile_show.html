@@ -1,0 +1,19 @@
+{% extends '__base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col">
+      <h1 class="mt-2">
+        Perfil del Usuario
+      </h1>
+      <hr class="mt-0 mb-4">
+        User: {{object.user}} <br>
+        Phone: {{object.phone}} <br>
+        <a href="{% url 'profiles:profile_edit_page' object.slug %}" class="btn btn-warning">Editar Perfil</a>
+    </div>
+  </div>
+{% endblock content %}
+    
