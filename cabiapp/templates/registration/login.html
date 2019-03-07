@@ -3,10 +3,6 @@
 {% load crispy_forms_tags %}
 
 
-
-{% block header %}
-{% endblock header %}
-
 {% block styles %}
     <link rel="stylesheet"  type="text/css" href="{% static 'assets/css/signin.css' %}">
     <style>
@@ -18,11 +14,21 @@
        }
     </style>
 {% endblock styles %}
-        
+
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block header %}
+{% endblock header %}
+
+{% block header_desktop %}
+{% endblock header_desktop %}
 
 {% block content %}
-
-    <form method="post" class="form-signin">
+<div class="login-wrap">
+        <div class="login-content">
+                <div class="login-form">
+    <form method="post" class="form-signin mx-auto" style="width: 340px;margin:0 auto">
         <img class="mb-4" src="{% static 'assets/image/cabifleet_all.png' %}" alt="" width="192" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Entrar</h1>
         <label for="inputEmail" class="sr-only">Email address</label>
@@ -34,6 +40,12 @@
         <p><a href="{% url 'web_site:create_accounts_page' %}">Crear cuenta?</a></p>
         
     </form>
+
+</div>
+</div>
+</div>
+
+
 
 
 {% endblock content %}

@@ -5,17 +5,25 @@
 
 {% block content %}
   <div class="row justify-content-center">
-    <div class="col">
-      <h1 class="mt-2">
-        Reporte de Productividad
-      </h1>
-      <hr class="mt-0 mb-4">
-        <form method="post">
-          {% csrf_token %}
-          {{ form|crispy }}
-          <button type="submit" class="btn  btn-lg btn-success">Enviar</button>
-        </form>
-    </div>
-  </div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">
+              <h3 class="text-center title-2">Reporte</h3>
+              <p class="text-center text-muted mt-1"> Hoy es {% now "jS F Y H:i" %}</p>
+          </div>
+          <hr class="mt-0 mb-4">
+          
+            <form method="post">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <button type="submit" class="btn btn-lg btn-primary">
+                  <i class="fa fa-dot-circle-o"></i>  Enviar
+              </button>
+            </form>
+        </div><!--END card body-->
+      </div><!--END card-->
+    </div><!--END col-md-12-->
+  </div><!--END row-->
 {% endblock content %}
     
