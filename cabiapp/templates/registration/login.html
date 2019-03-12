@@ -16,7 +16,7 @@
         <form method="post" class="form-inlin justify-content-center" style="width: 340px;margin:0 auto">
                 {% csrf_token %}
                 {{ form|crispy }}
-            <button type="submit" class="btn btn-block btn-success ">Entrar!</button>
+            <button type="submit" class="btn btn-block btn-success">Entrar!</button>
             <br>
             <p><a class="btn btn-sm btn-light"  href="{% url 'password_reset' %}">Perdiste la contraseña?</a></p>
             <p><a class="btn btn-sm btn-light" href="{% url 'web_site:create_accounts_page' %}">Crear cuenta   </a></p>

@@ -42,6 +42,10 @@
         $('#id_password2').attr('placeholder', 'Repetir contraseña')
         $("#id_password2").attr("required", true);
 
+
+        
+        $('#hint_id_password1').addClass("d-none");
+
         $('#hint_id_username').removeClass("text-muted");
         $('#hint_id_username').addClass("text-white");
 
@@ -50,6 +54,9 @@
 
         $('#hint_id_email').removeClass("text-muted");
         $('#hint_id_email').addClass("text-white");
+
+        $('#hint_id_password2').removeClass("text-muted");
+        $('#hint_id_password2').addClass("text-white");
     });
 </script>
 {% endblock scripts %}

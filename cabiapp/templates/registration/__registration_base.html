@@ -20,19 +20,21 @@
             <div id="cover-caption">
                 <div id="container" class="container">
                     <div class="row text-white">
-                        {% if messages %}
-                            <ul class="messages">
-                                {% for message in messages %}
-                                <div class="alert alert-{% if message.tags %}{{ message.tags }}{% else %}info{% endif %} alert-dismissible fade show" 
-                                        role="alert">
-                                        {{ message }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
+                        <div class="col-sm-6 offset-sm-3 text-center">
+                            {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                    <div class="alert alert-{% if message.tags %}{{ message.tags }}{% else %}info{% endif %} alert-dismissible fade show" 
+                                            role="alert">
+                                            {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
                         
                         {% block container %}
                             <!--page-->
