@@ -65,6 +65,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'cabiapp.backends.EmailOrUsernameModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 ROOT_URLCONF = 'cabiapp.urls'
 
 TEMPLATES = [
@@ -158,3 +163,6 @@ STATICFILES_DIRS = [
 
 LOGOUT_REDIRECT_URL = '/'
 LOGOUT_URL = 'logout'
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

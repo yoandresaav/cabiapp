@@ -6,6 +6,8 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from .models import ReporteProductividad
 
+from .forms import UserCreationWithEmailForm
+
 class ReporteCreateView(LoginRequiredMixin, CreateView):
     template_name = 'web_site/home.html'
     model = ReporteProductividad
@@ -16,8 +18,8 @@ class ReporteCreateView(LoginRequiredMixin, CreateView):
     )
 
 class CreateAccountsView(CreateView):
-    template_name = 'web_site/accounts/create_accounts.html'
-    form_class = UserCreationForm
+    template_name = 'registration/create_accounts.html'
+    form_class = UserCreationWithEmailForm
 
     def get_success_url(self):
         # Go to login page

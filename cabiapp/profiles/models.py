@@ -7,6 +7,7 @@ from django.db.models.signals import post_save
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    email_confirmed = models.BooleanField(default=False)
     slug = models.UUIDField(default=uuid.uuid4, blank=True, editable=False)
     phone = models.CharField('Teléfono', max_length=13, blank=True, null=True)
 
