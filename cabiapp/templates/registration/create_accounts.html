@@ -1,100 +1,58 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    {% load static %}
-    {% load crispy_forms_tags %}
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% extends 'registration/__registration_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
-    <style>
-        html,body{
-            height: 100%;
-        }
+{% block title %}Create User{% endblock title %}
 
-        #cover {
-            /*background: linear-gradient(rgba(255,255,255,.2), rgba(255,255,255,.2)), url("{% static 'assets/image/citylarge.gif' %}") center center no-repeat;*/
-            background: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)), url("{% static 'assets/image/citylarge.gif' %}") center center no-repeat;
-            background-size: cover;
-            height: 100%;
-            text-align: center;
-            display: flex;
-            align-items: center;
-         
-        }
-        section#container{
-            opacity: 1 !important;
-        }
 
-        #cover-caption {
-         width: 100%;
-        }
-        label {
-           display: none !important;
-       }
-    </style>
-  </head>
-  <body>
-        <section id="cover">
-            <div id="cover-caption">
-                <div id="container" class="container">
-                    <div class="row text-white">
-                        <div class="col-sm-6 offset-sm-3 text-center">
-                                <a href="{% url 'web_site:createreporte_page' %}">
-                                        <img class="mb-4" src="{% static 'assets/image/cabifleet_all.png' %}" alt="" width="212" height="92">
-                                    </a>
-                            <h3 class="display-5 pb-3">Crear Cuenta</h3>
-                            <div class="info-form">
-                                <form method="post" class="form-inlin justify-content-center" style="width: 340px;margin:0 auto">
-                                        {% csrf_token %}
-                                        {{ form|crispy }}
-                                    <button type="submit" class="btn btn-block btn-success ">Crear cuenta</button>
-                                    <br>
-                                    <p><a class="btn btn-sm btn-light"  href="{% url 'web_site:createreporte_page' %}">Regresar</a></p>
-                                    
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+{% block container %}
+<div class="col-sm-6 offset-sm-3 text-center">
+        <a href="{% url 'web_site:createreporte_page' %}">
+                <img class="mb-4" src="{% static 'assets/image/cabifleet_all.png' %}" alt="" width="212" height="92">
+            </a>
+    <h3 class="display-5 pb-3">Crear Cuenta</h3>
+    <div class="info-form">
+        <form method="post" class="form-inlin justify-content-center" style="width: 340px;margin:0 auto">
+                {% csrf_token %}
+                {{ form|crispy }}
+            <button type="submit" class="btn btn-block btn-success ">Crear cuenta</button>
+            <br>
+            <p><a class="btn btn-sm btn-light"  href="{% url 'web_site:createreporte_page' %}">Regresar</a></p>
+            
+        </form>
+    </div>
+</div>
+{% endblock container %}
+    
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script>
-            $( document ).ready(function() {
-                $('#id_username').attr('placeholder', 'Usuario');
-                $("#id_username").attr("required", true);
-                //$("#id_username").addClass("sr-only");
-                
-                $('#id_email').attr('placeholder', 'Correo');
-                $("#id_email").attr("required", true);
-                
-                $('#id_password1').attr('placeholder', 'Contraseña')
-                $("#id_password1").attr("required", true);
-                
-                $('#id_password2').attr('placeholder', 'Repetir contraseña')
-                $("#id_password2").attr("required", true);
+{% block scripts %}
+<script>
+    $( document ).ready(function() {
+        $('#id_username').attr('placeholder', 'Usuario');
+        $("#id_username").attr("required", true);
+        //$("#id_username").addClass("sr-only");
+        
+        $('#id_email').attr('placeholder', 'Correo');
+        $("#id_email").attr("required", true);
+        
+        $('#id_password1').attr('placeholder', 'Contraseña')
+        $("#id_password1").attr("required", true);
+        
+        $('#id_password2').attr('placeholder', 'Repetir contraseña')
+        $("#id_password2").attr("required", true);
 
-                $('#hint_id_username').removeClass("text-muted");
-                $('#hint_id_username').addClass("text-white");
+        $('#hint_id_username').removeClass("text-muted");
+        $('#hint_id_username').addClass("text-white");
 
-                $('#hint_id_password1').removeClass("text-muted");
-                $('#hint_id_password1').addClass("text-white");
+        $('#hint_id_password1').removeClass("text-muted");
+        $('#hint_id_password1').addClass("text-white");
 
-                $('#hint_id_email').removeClass("text-muted");
-                $('#hint_id_email').addClass("text-white");
-            });
-        </script>
-  </body>
-</html>
+        $('#hint_id_email').removeClass("text-muted");
+        $('#hint_id_email').addClass("text-white");
+    });
+</script>
+{% endblock scripts %}
+                  
 
 

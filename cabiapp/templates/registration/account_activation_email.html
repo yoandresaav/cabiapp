@@ -1,0 +1,9 @@
+{% autoescape off %}
+Hola {{ user.username }},
+
+Por favor haz click en el link a continuación para activar tu registro:
+
+http://{{ domain }}{% url 'web_site:activate' uidb64=uid token=token %}
+
+Equipo CabiFleet
+{% endautoescape %}

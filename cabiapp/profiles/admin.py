@@ -1,5 +1,3 @@
-from django.contrib import admin
-
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
