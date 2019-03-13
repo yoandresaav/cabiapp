@@ -179,10 +179,11 @@ else:
     EMAIL_PORT = 465
 
 # Loggin
-LOGFILE_ROOT = os.path.join(BASE_DIR, 'log')
 import logging.config
 from django.utils.log import AdminEmailHandler
 # Reset logging
+LOGFILE_ROOT = os.path.join(BASE_DIR, 'log')
+LOGFILE = os.path.join(LOGFILE_ROOT, 'project.log')
 LOGGING_CONFIG = None
 LOGGING = {
     'version': 1,
@@ -200,7 +201,7 @@ LOGGING = {
         'proj_log_file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': str(LOGFILE_ROOT + 'project.log'),
+            'filename': LOGFILE,
             'formatter': 'verbose'
         },
         'console': {
