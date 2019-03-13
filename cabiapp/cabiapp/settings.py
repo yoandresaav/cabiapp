@@ -212,7 +212,7 @@ LOGGING = {
             'formatter': 'verbose'
         },
         'console': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
@@ -223,8 +223,8 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['proj_log_file'],
-            'level': 'DEBUG',
+            'handlers': ['console'],
+            'level': 'WARNING',
             'propagate': True,
         },
         'django.request': {
