@@ -165,7 +165,7 @@ STATICFILES_DIRS = [
 LOGOUT_REDIRECT_URL = '/'
 LOGOUT_URL = 'logout'
 
-ADMINS = [(config.get('adminEmail', 'USER'),config.get('adminEmail', 'EMAIL')),]
+ADMINS = [(config.get('adminemail', 'USER'), config.get('adminemail', 'EMAIL')),]
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
