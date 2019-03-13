@@ -165,7 +165,7 @@ else:
 LOGOUT_REDIRECT_URL = '/'
 LOGOUT_URL = 'logout'
 
-ADMINS = [(config.get('adminemail', 'USER'), config.get('adminemail', 'EMAIL')),]
+# ADMINS = [(config.get('adminemail', 'USER'), config.get('adminemail', 'EMAIL')),]
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -223,8 +223,8 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['console'],
-            'level': 'WARNING',
+            'handlers': ['proj_log_file'],
+            'level': 'DEBUG',
             'propagate': True,
         },
         'django.request': {
