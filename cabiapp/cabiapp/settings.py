@@ -165,6 +165,8 @@ STATICFILES_DIRS = [
 LOGOUT_REDIRECT_URL = '/'
 LOGOUT_URL = 'logout'
 
+ADMINS = [(config.get('adminEmail', 'USER'),config.get('adminEmail', 'EMAIL')),]
+
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
@@ -175,3 +177,54 @@ else:
     EMAIL_HOST_USER = config.get('email', 'EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = config.get('email', 'EMAIL_HOST_PASSWORD')
     EMAIL_PORT = 465
+
+# Loggin
+LOGFILE_ROOT = os.path.join(BASE_DIR, 'log')
+import logging.config
+from django.utils.log import AdminEmailHandler
+# Reset logging
+LOGGING_CONFIG = None
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(pathname)s:%(lineno)s] %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'proj_log_file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': str(LOGFILE_ROOT + 'project.log'),
+            'formatter': 'verbose'
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['proj_log_file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    }
+}  
+
+logging.config.dictConfig(LOGGING)
