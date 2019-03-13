@@ -1,3 +1,4 @@
+import logging
 from django.shortcuts import render, redirect
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -56,8 +57,13 @@ class CreateAccountsView(CreateView):
                     'token': account_activation_token.make_token(user),
                 })
                 # Enviar correo de que  se creo el usuario
-                user.email_user(subject, message)
-                messages.success(request, 'Te hemos enviado un correo con el link de activación de tu cuenta')
+                try:
+                    user.email_user(subject, message)
+                    messages.success(request, 'Te hemos enviado un correo con el link de activación de tu cuenta')
+                except Exception as e:
+                    messages.error(request, 'Lo sentimos no hemos podido enviar un link de activación. Comunicate con nosotros.')
+                    logging.getLogger("error_logger").error(repr(e))
+
                 return HttpResponseRedirect(reverse_lazy('web_site:thanks_page'))
 
         return render(request, self.template_name, {'form':form})

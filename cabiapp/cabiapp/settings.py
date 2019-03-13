@@ -167,7 +167,7 @@ LOGOUT_URL = 'logout'
 
 # ADMINS = [(config.get('adminemail', 'USER'), config.get('adminemail', 'EMAIL')),]
 
-if DEBUG:
+if not DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
