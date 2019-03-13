@@ -183,56 +183,24 @@ import logging.config
 from django.utils.log import AdminEmailHandler
 
 # Reset logging
-LOGFILE_ROOT = os.path.join(BASE_DIR, 'log')
-LOGFILE = os.path.join(LOGFILE_ROOT, 'project.log')
+LOGFILE_ROOT = os.path.join(BASE_DIR, 'logs')
+ERROR_LOG_FILE = os.path.join(LOGFILE_ROOT, 'ErrorLoggers.log')
+INFO_LOG_FILE = os.path.join(LOGFILE_ROOT, 'InfoLoggers.log')
 
-if not os.path.exists(LOGFILE):
+if not os.path.exists(ERROR_LOG_FILE):
     os.makedirs(LOGFILE_ROOT, exist_ok=True)
-    file = open(LOGFILE, 'w')
+    file = open(ERROR_LOG_FILE, 'w')
     file.close()
-    
-LOGGING_CONFIG = None
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': "[%(asctime)s] %(levelname)s [%(pathname)s:%(lineno)s] %(message)s",
-            'datefmt': "%d/%b/%Y %H:%M:%S"
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
-    },
-    'handlers': {
-        'proj_log_file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': LOGFILE,
-            'formatter': 'verbose'
-        },
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
-        },
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-        }
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['proj_log_file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-    }
-}  
 
-logging.config.dictConfig(LOGGING)
+if not os.path.exists(INFO_LOG_FILE):
+    os.makedirs(LOGFILE_ROOT, exist_ok=True)
+    file = open(INFO_LOG_FILE, 'w')
+    file.close()
+
+# importing logger settings
+try:
+    from .logger_settings import *
+except Exception as e:
+    # in case of any error, pass silently.
+    pass
+    
