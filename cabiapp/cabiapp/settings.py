@@ -181,9 +181,16 @@ else:
 # Loggin
 import logging.config
 from django.utils.log import AdminEmailHandler
+
 # Reset logging
 LOGFILE_ROOT = os.path.join(BASE_DIR, 'log')
 LOGFILE = os.path.join(LOGFILE_ROOT, 'project.log')
+
+if not os.path.exists(LOGFILE):
+    os.makedirs(LOGFILE_ROOT, exist_ok=True)
+    file = open(LOGFILE, 'w')
+    file.close()
+    
 LOGGING_CONFIG = None
 LOGGING = {
     'version': 1,

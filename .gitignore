@@ -4,3 +4,4 @@
 __pycache__
 production.cfg
 *.log
+log
