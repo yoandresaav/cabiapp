@@ -167,7 +167,7 @@ LOGOUT_URL = 'logout'
 
 # ADMINS = [(config.get('adminemail', 'USER'), config.get('adminemail', 'EMAIL')),]
 
-if not DEBUG:
+if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -177,6 +177,8 @@ else:
     EMAIL_HOST_USER = config.get('email', 'EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = config.get('email', 'EMAIL_HOST_PASSWORD')
     EMAIL_PORT = 465
+
+RECAPTCHA_SECRET_KEY = config.get('recaptcha', 'RECAPTCHA_SECRET_KEY'),
 
 # Loggin
 import logging.config

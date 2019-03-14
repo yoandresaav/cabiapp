@@ -1,4 +1,6 @@
 import logging
+
+from django import forms
 from django.shortcuts import render, redirect
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -12,6 +14,7 @@ from django.template.loader import render_to_string
 
 from django.contrib import messages
 
+
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 
@@ -19,9 +22,10 @@ from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 
 from django.contrib.auth import get_user_model, login
+from django.contrib.auth.views import PasswordResetView
 
 from .models import ReporteProductividad
-from .forms import UserCreationWithEmailForm
+from .forms import UserCreationWithEmailForm, CabiappPasswordResetForm
 from .tokens import account_activation_token
 
 User = get_user_model()
@@ -40,7 +44,7 @@ class CreateAccountsView(CreateView):
     form_class = UserCreationWithEmailForm
 
     def post(self, request, *args, **kwargs):
-        form = UserCreationWithEmailForm(request.POST)
+        form = UserCreationWithEmailForm(request.POST, request=request)
         if form.is_valid():
 
             # no save the user
@@ -96,3 +100,17 @@ def activate(request, uidb64, token):
         return redirect('web_site:createreporte_page')
     else:
         return render(request, 'registration/account_activation_invalid.html')
+
+class CabiAppPasswordResetView(PasswordResetView):
+    form_class = CabiappPasswordResetForm
+    def post(self, request, *args, **kwargs):
+        """
+        Handle POST requests: instantiate a form instance with the passed
+        POST variables and then check if it's valid.
+        form = self.get_form()
+        """
+        form = CabiappPasswordResetForm(request.POST, request=request)
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)

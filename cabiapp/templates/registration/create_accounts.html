@@ -16,6 +16,10 @@
         <form method="post" class="form-inlin justify-content-center" style="width: 340px;margin:0 auto">
                 {% csrf_token %}
                 {{ form|crispy }}
+            
+            <div class="text-center">
+                <div class="g-recaptcha d-inline-block" data-sitekey="6Ld7hpcUAAAAAKBsJ1LeaQ6ulVsTsVEWtWbEDYh7"></div>
+            </div>
             <button type="submit" class="btn btn-block btn-success ">Crear cuenta</button>
             <br>
             <p><a class="btn btn-sm btn-light"  href="{% url 'web_site:createreporte_page' %}">Regresar</a></p>
@@ -27,6 +31,7 @@
     
 
 {% block scripts %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
     $( document ).ready(function() {
         $('#id_username').attr('placeholder', 'Usuario');
