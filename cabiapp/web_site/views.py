@@ -8,8 +8,6 @@ from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import CreateView
-from django.contrib.auth.forms import UserCreationForm
 from django.template.loader import render_to_string
 
 from django.contrib import messages

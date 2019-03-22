@@ -188,8 +188,8 @@ else:
 RECAPTCHA_SECRET_KEY = config.get('recaptcha', 'RECAPTCHA_SECRET_KEY'),
 
 # Loggin
-import logging.config
-from django.utils.log import AdminEmailHandler
+# import logging.config
+# from django.utils.log import AdminEmailHandler
 
 # Reset logging
 LOGFILE_ROOT = os.path.join(BASE_DIR, 'logs')
