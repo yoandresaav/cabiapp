@@ -26,6 +26,7 @@ else:
     DEBUG = False
     config.read('%s/production.cfg' % (SETTINGS_DIR))
 
+DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config.get('security', 'SECRET_KEY')
@@ -35,9 +36,11 @@ ALLOWED_HOSTS = [
     config.get('host', 'HOST_LIVE')
 ]
 
-
-SECURE_SSL_REDIRECT = True 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+"""
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+"""
 
 # Application definition
 
