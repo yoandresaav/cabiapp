@@ -209,7 +209,7 @@ if not os.path.exists(INFO_LOG_FILE):
 # importing logger settings
 try:
     from .logger_settings import *
-except Exception as e:
+except Exception:
     # in case of any error, pass silently.
     pass
     
