@@ -26,7 +26,6 @@ else:
     DEBUG = False
     config.read('%s/production.cfg' % (SETTINGS_DIR))
 
-DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config.get('security', 'SECRET_KEY')
