@@ -1,9 +1,14 @@
 from django.db import models
-
-# Create your models here.
+from django.contrib.auth import get_user_model
 
 class Placa(models.Model):
-    placa = models.CharField('Placa', max_length=6)
+    user = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+    placa = models.CharField('Placa que reportas', max_length=6)
 
     def __str__(self):
         return self.placa

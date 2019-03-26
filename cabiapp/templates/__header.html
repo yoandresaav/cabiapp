@@ -4,8 +4,10 @@
     <div class="header-mobile__bar">
         <div class="container-fluid">
             <div class="header-mobile-inner">
-                <a class="logo" href="index.html">
-                    <img src="{% static 'assets/images/icon/logo.png' %}" alt="CoolAdmin" />
+                <a class="logo text-left" 
+                    href="{% url 'web_site:createreporte_page' %}"
+                >
+                    <img  src="{% static 'assets/image/cabifleet_all.png' %}" style="height: 60px;" alt="Cabiapp" />
                 </a>
                 <button class="hamburger hamburger--slider" type="button">
                     <span class="hamburger-box">

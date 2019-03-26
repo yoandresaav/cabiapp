@@ -3,7 +3,7 @@
 <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
             <a href="#">
-                <img src="{% static 'assets/image/cabifleet_all.png' %}" alt="Cool Admin" />
+                <img src="{% static 'assets/image/cabifleet_all.png' %}" class="img-fluid" style="width: 120px;" alt="Cool Admin" />
             </a>
         </div>
         <div class="menu-sidebar__content js-scrollbar1">
@@ -11,30 +11,36 @@
                 <ul class="list-unstyled navbar__list">
                     <li class="active has-sub">
                         <a class="js-arrow" href="#">
-                            <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                        <ul class="list-unstyled navbar__sub-list js-sub-list">
-                            <li>
-                                <a href="index.html">Dashboard 1</a>
-                            </li>
-                            <li>
-                                <a href="index2.html">Dashboard 2</a>
-                            </li>
-                            <li>
-                                <a href="index3.html">Dashboard 3</a>
-                            </li>
-                            <li>
-                                <a href="index4.html">Dashboard 4</a>
-                            </li>
-                        </ul>
+                            <i class="fas fa-tachometer-alt"></i>Reportar</a>
+                            {% if false %}
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="index.html">Dashboard 1</a>
+                                </li>
+                                <li>
+                                    <a href="index2.html">Dashboard 2</a>
+                                </li>
+                                <li>
+                                    <a href="index3.html">Dashboard 3</a>
+                                </li>
+                                <li>
+                                    <a href="index4.html">Dashboard 4</a>
+                                </li>
+                            </ul>
+                            {% endif %}
                     </li>
+                    {% if user.is_superuser %}
                     <li>
-                        <a href="chart.html">
-                            <i class="fas fa-chart-bar"></i>Charts</a>
+                        <a href="{% url 'web_site:admin_page_reporte' %}">
+                            <i class="fas fa-chart-bar"></i>Ver Reportes</a>
                     </li>
+                    {% endif %}
                     <li>
                         <a href="table.html">
-                            <i class="fas fa-table"></i>Tables</a>
+                            <i class="fas fa-table"></i>Placas <span class="badge badge-primary">0</span>
+                        </a>
                     </li>
+                    {% if false %}
                     <li>
                         <a href="form.html">
                             <i class="far fa-check-square"></i>Forms</a>
@@ -101,6 +107,7 @@
                             </li>
                         </ul>
                     </li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>

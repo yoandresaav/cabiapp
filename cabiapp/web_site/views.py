@@ -29,6 +29,7 @@ from .tokens import account_activation_token
 User = get_user_model()
 
 class ReporteCreateView(LoginRequiredMixin, CreateView):
+    # Page report after login
     template_name = 'web_site/home.html'
     model = ReporteProductividad
     success_url = 'thanks/'
@@ -73,6 +74,11 @@ class CreateAccountsView(CreateView):
     def get_success_url(self):
         # Go to login page
         return reverse('web_site:createreporte_page')
+
+
+class CheckViewReport(LoginRequiredMixin, TemplateView):
+    template_name = ''
+
 
 class ThanksView(LoginRequiredMixin, TemplateView):
     template_name = 'web_site/end.html'

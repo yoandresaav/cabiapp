@@ -40,44 +40,42 @@
   <body class="animsition">
     <div class="page-wrapper">
     
-    {% block header %}
-      <section id="header">
-        {% include '__header.html' %}
-      </section>
-    {% endblock header %}
+      {% block header %}
+        <section id="header">
+          {% include '__header.html' %}
+        </section>
+      {% endblock header %}
 
     
-    {% block sidebar %}
-      {% include '__sidebar_menu.html' %}
-    {% endblock sidebar %}
+      {% block sidebar %}
+        {% include '__sidebar_menu.html' %}
+      {% endblock sidebar %}
       
-     <!-- PAGE CONTAINER-->
-    <div class="page-container">
-        
-        {% block header_desktop %}
-          {% include '__header_desktop.html' %}
-        {% endblock header_desktop %}
+      <!-- PAGE CONTAINER-->
+      <div class="page-container">
+          
+          {% block header_desktop %}
+            {% include '__header_desktop.html' %}
+          {% endblock header_desktop %}
 
-        <div class="main-content">
-            <div class="section__content section__content--p30">
-                <div class="container-fluid">
-                  {% block content %}
-                    <!--ADD TEMPLATE CONTENT HERE-->
-                  {% endblock %}
+          <div class="main-content">
+              <div class="section__content section__content--p30">
+                  <div class="container-fluid">
+                    {% block content %}
+                      <!--ADD TEMPLATE CONTENT HERE-->
+                    {% endblock %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="copyright">
+                                <p>Copyright &copy; {% now 'Y' %} Bananolabs. All rights reserved. <a href="#">Subir</a></p>
+                            </div>
+                        </div>
+                    </div>
 
-                  <div class="row">
-                      <div class="col-md-12">
-                          <div class="copyright">
-                              <p>Copyright &copy; {% now 'Y' %} Bananolabs. All rights reserved. <a href="#">Subir</a></p>
-                          </div>
-                      </div>
                   </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
+              </div>
+          </div>
+      </div>
   
   </div><!--END page-wrapper-->
       
