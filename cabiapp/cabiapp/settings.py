@@ -36,11 +36,11 @@ ALLOWED_HOSTS = [
     config.get('host', 'HOST_LIVE')
 ]
 
-"""
+
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-"""
+
 
 # Application definition
 
