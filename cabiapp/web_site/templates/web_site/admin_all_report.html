@@ -38,8 +38,8 @@
                         <thead>
                             <tr>
                                 <th>Placa</th>
+                                <th>Usuario</th>
                                 <th>Día</th>
-                                <th>Viajes</th>
                                 <th>Facturado</th>
                                 <th>Gasolina</th>
                                 <th>Km/día</th>
@@ -49,19 +49,19 @@
                             {% for reporte in object_list %}
                             <tr>
                                 <td>{{reporte.placa}}</td>
-                                <td>{{reporte.dia}}</td>
-                                <td>{{reporte.numero_viajes}}</td>
-                                <td>{{reporte.monto_facturado}}</td>
-                                <td>{{reporte.gasolina_dias}}</td>
-                                <td>{{reporte.kilometros_dia}}</td>
+                                <td class="text-center">{{reporte.user}}</td>
+                                <td class="text-center">{{reporte.dia}}</td>
+                                <td class="text-center">{{reporte.total_facturado}}</td>
+                                <td class="text-center">{{reporte.gasolina_dia}}</td>
+                                <td class="text-center">{{reporte.kilometros_dia}}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th>Placa</th>
+                                <th>Usuario</th>
                                 <th>Día</th>
-                                <th>Viajes</th>
                                 <th>Facturado</th>
                                 <th>Gasolina</th>
                                 <th>Km/día</th>

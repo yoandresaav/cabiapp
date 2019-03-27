@@ -1,4 +1,5 @@
 from django.urls import path, re_path
+from django.contrib.admin.views.decorators import staff_member_required
 
 from .views import (
     ReporteCreateView, ThanksView, SuperAdminView, 
@@ -50,7 +51,7 @@ urlpatterns = [
 
     path(
         'check/view/reporte/',
-        SuperAdminView.as_view(),
+        staff_member_required(SuperAdminView.as_view()),
         name='admin_page_reporte'
     ), # admin worker, no staff
 ]

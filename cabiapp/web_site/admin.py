@@ -6,21 +6,26 @@ from .models import Placa, ReporteProductividad
 
 @admin.register(Placa)
 class PlacaAdmin(admin.ModelAdmin):
-    list_display = ('id', 'placa')
+    list_display = ('id', 'user', 'placa')
+    list_filter = ('user',)
 
 
 @admin.register(ReporteProductividad)
 class ReporteProductividadAdmin(admin.ModelAdmin):
     list_display = (
         'id',
+        'user',
         'placa',
         'dia',
         'numero_viajes',
         'horas_conexion',
-        'monto_facturado',
+        'monto_facturado_cabify',
+        'monto_facturado_didi',
+        'monto_facturado_uber',
+        'monto_facturado_beat',
         'gasolina_dia',
         'kilometros_dia',
         'create',
         'update',
     )
-    list_filter = ('placa', 'create', 'update')
+    list_filter = ('user', 'placa', 'create', 'update')

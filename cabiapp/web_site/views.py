@@ -33,8 +33,11 @@ class ReporteCreateView(LoginRequiredMixin, CreateView):
     template_name = 'web_site/home.html'
     model = ReporteProductividad
     success_url = 'thanks/'
+
+
     fields = (
-        'placa', 'dia', 'numero_viajes', 'horas_conexion', 'monto_facturado', 
+        'placa', 'dia', 'numero_viajes', 'horas_conexion',
+        'monto_facturado_cabify', 'monto_facturado_didi', 'monto_facturado_uber', 'monto_facturado_beat',
         'gasolina_dia', 'kilometros_dia'
     )
 
@@ -91,8 +94,12 @@ class ThanksView(LoginRequiredMixin, TemplateView):
 
 
 class SuperAdminView(LoginRequiredMixin, ListView):
-    template_name = 'web_site/super_admin.html'
+    # Admin. Ver todos los reportes
+    template_name = 'web_site/admin_all_report.html'
     model = ReporteProductividad
+    queryset = ReporteProductividad.objects.select_related(
+        'placa', 'user'
+    ).all()
 
 
 def activate(request, uidb64, token):
