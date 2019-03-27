@@ -32,6 +32,13 @@ class ReporteProductividad(models.Model):
         (domingo, 'Domingo'),
     )
 
+    user = models.ForeignKey(
+        get_user_model(),
+        related_name='reportes',
+        on_delete=models.CASCADE,
+        null=True, blank=True
+    )
+
     placa = models.ForeignKey(Placa, on_delete=models.SET_NULL, null=True)
     dia = models.CharField('Día que reporta', max_length=10, choices=DIAS_REPORTE)
 
@@ -48,6 +55,7 @@ class ReporteProductividad(models.Model):
 
     class Meta:
         verbose_name_plural = 'ReportesProductividades'
+        ordering = ('create',)
 
     def __str__(self):
         return '{0} + {1}'.format(self.placa, self.dia) 

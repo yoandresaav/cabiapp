@@ -38,6 +38,12 @@ class ReporteCreateView(LoginRequiredMixin, CreateView):
         'gasolina_dia', 'kilometros_dia'
     )
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
 class CreateAccountsView(CreateView):
     template_name = 'registration/create_accounts.html'
     form_class = UserCreationWithEmailForm
@@ -118,3 +124,12 @@ class CabiAppPasswordResetView(PasswordResetView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+
+class VerMisReportesView(LoginRequiredMixin, ListView):
+    # Ver mis reportes
+    template_name = 'web_site/ver_mis_reportes.html'
+    # model = ReporteProductividad
+    
+    def get_queryset(self):
+        user = self.request.user
+        return user.reportes.all()

@@ -9,8 +9,8 @@
         <div class="menu-sidebar__content js-scrollbar1">
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
-                    <li class="active has-sub">
-                        <a class="js-arrow" href="#">
+                    <li class="{% if active_link == 'reportar' %}active{% endif %} has-sub">
+                        <a class="js-arrow" href="{% url 'web_site:createreporte_page' %}">
                             <i class="fas fa-tachometer-alt"></i>Reportar</a>
                             {% if false %}
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
@@ -29,23 +29,26 @@
                             </ul>
                             {% endif %}
                     </li>
-                    {% if user.is_superuser %}
-                    <li>
-                        <a href="{% url 'web_site:admin_page_reporte' %}">
-                            <i class="fas fa-chart-bar"></i>Ver Reportes</a>
-                    </li>
-                    {% endif %}
+                    
                     <li>
                         <a href="table.html">
                             <i class="fas fa-table"></i>Placas <span class="badge badge-primary">0</span>
                         </a>
                     </li>
-                    {% if false %}
                     <li>
-                        <a href="form.html">
-                            <i class="far fa-check-square"></i>Forms</a>
+                        <a href="{% url 'web_site:ver_mis_reportes_page' %}">
+                            <i class="far fa-check-square"></i>Ver tus reportes</a>
                     </li>
-                    <li>
+                    
+                    {% if user.is_superuser %}
+                    <hr>
+                    <li class="{% if active_link == 'ver_reportes' %}active{% endif %}" >
+                        <a href="{% url 'web_site:admin_page_reporte' %}">
+                            <i class="fas fa-chart-bar"></i>Ver Reportes</a>
+                    </li>
+                    {% endif %}
+                    {% if false %}
+                        <li>
                         <a href="#">
                             <i class="fas fa-calendar-alt"></i>Calendar</a>
                     </li>

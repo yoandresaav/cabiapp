@@ -2,7 +2,8 @@ from django.urls import path, re_path
 
 from .views import (
     ReporteCreateView, ThanksView, SuperAdminView, 
-    CreateAccountsView, activate, CabiAppPasswordResetView
+    CreateAccountsView, activate, CabiAppPasswordResetView,
+    VerMisReportesView
 )
 
 app_name = 'web_site'
@@ -13,6 +14,14 @@ urlpatterns = [
         ReporteCreateView.as_view(),
         name='createreporte_page'
     ),
+
+    path(
+        'ver/mis/reportes/', 
+        VerMisReportesView.as_view(),
+        name='ver_mis_reportes_page'
+    ),
+
+    ### Accounts functions
 
     path(
         'accounts/create/',
@@ -36,6 +45,8 @@ urlpatterns = [
         r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         activate, name='activate'
     ),
+
+    ### Admin functions
 
     path(
         'check/view/reporte/',
