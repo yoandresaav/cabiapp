@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.dispatch import receiver
 
 class Placa(models.Model):
@@ -45,17 +46,41 @@ class ReporteProductividad(models.Model):
     dia = models.CharField('Día que reporta', max_length=10, choices=DIAS_REPORTE)
 
     numero_viajes = models.PositiveIntegerField('Cantidad de Viajes Totales del Día', default=0)
-    horas_conexion = models.PositiveIntegerField('Horas de Conexión', default=0)
+    horas_conexion = models.PositiveIntegerField(
+        'Horas de Conexión', default=0, validators=[MaxValueValidator(24)],
+    )
 
-    monto_facturado_cabify = models.PositiveIntegerField('Facturación Cabify (sin bonos, sin decimales)', default=0)
-    monto_facturado_didi = models.PositiveIntegerField('Facturación Didi (sin bonos, sin decimales)', default=0)
-    monto_facturado_uber = models.PositiveIntegerField('Facturación Uber (sin bonos, sin decimales)', default=0)
-    monto_facturado_beat = models.PositiveIntegerField('Facturación Beat (sin bonos, sin decimales)', default=0)
+    monto_facturado_cabify = models.PositiveIntegerField(
+        'Facturación Cabify (sin bonos, sin decimales)', default=0,
+        validators=[MaxValueValidator(3000)]
+    )
+
+    monto_facturado_didi = models.PositiveIntegerField(
+        'Facturación Didi (sin bonos, sin decimales)', default=0,
+        validators=[MaxValueValidator(3000)]
+    )
+
+    monto_facturado_uber = models.PositiveIntegerField(
+        'Facturación Uber (sin bonos, sin decimales)', default=0,
+        validators=[MaxValueValidator(3000)]
+    )
+
+    monto_facturado_beat = models.PositiveIntegerField(
+        'Facturación Beat (sin bonos, sin decimales)', default=0,
+        validators=[MaxValueValidator(3000)]
+    )
 
     total_facturado = models.PositiveIntegerField('Total', default=0)
 
-    gasolina_dia = models.PositiveIntegerField('Monto de Gasolina del día', default=0)
-    kilometros_dia = models.PositiveIntegerField('Kilometros recorridos del día', default=0)
+    gasolina_dia = models.PositiveIntegerField(
+        'Monto de Gasolina del día', default=0,
+        validators=[MaxValueValidator(999)]
+    )
+
+    kilometros_dia = models.PositiveIntegerField(
+        'Kilometros recorridos del día', default=0,
+        validators=[MaxValueValidator(999)]
+    )
 
     create = models.DateField(auto_now_add=True)
     update = models.DateField(auto_now=True)
