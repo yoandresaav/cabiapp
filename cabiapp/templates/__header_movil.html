@@ -21,31 +21,37 @@
         <div class="container-fluid">
             <ul class="navbar-mobile__list list-unstyled">
                 <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li>
-                            <a href="index.html">Dashboard 1</a>
-                        </li>
-                        <li>
-                            <a href="index2.html">Dashboard 2</a>
-                        </li>
-                        <li>
-                            <a href="index3.html">Dashboard 3</a>
-                        </li>
-                        <li>
-                            <a href="index4.html">Dashboard 4</a>
-                        </li>
-                    </ul>
+                    <a class="js-arrow" href="{% url 'web_site:createreporte_page' %}">
+                        <i class="fas fa-tachometer-alt"></i>Reportar</a>
+                        {% if false %}
+                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                            <li>
+                                <a href="index.html">Dashboard 1</a>
+                            </li>
+                            <li>
+                                <a href="index2.html">Dashboard 2</a>
+                            </li>
+                            <li>
+                                <a href="index3.html">Dashboard 3</a>
+                            </li>
+                            <li>
+                                <a href="index4.html">Dashboard 4</a>
+                            </li>
+                        </ul>
+                        {% endif %}
                 </li>
                 <li>
-                    <a href="chart.html">
-                        <i class="fas fa-chart-bar"></i>Charts</a>
+                    <a href="{% url 'web_site:ver_mis_reportes_page' %}">
+                        <i class="far fa-check-square"></i>Ver tus reportes</a>
                 </li>
+                {% if user.is_superuser %}
                 <li>
                     <a href="table.html">
-                        <i class="fas fa-table"></i>Tables</a>
+                        <i class="fas fa-chart-bar"></i>Ver Reportes</a>
                 </li>
+                {% endif %}
+                
+                {% if false %}
                 <li>
                     <a href="form.html">
                         <i class="far fa-check-square"></i>Forms</a>
@@ -112,6 +118,7 @@
                         </li>
                     </ul>
                 </li>
+            {% endif %}
             </ul>
         </div>
     </nav>

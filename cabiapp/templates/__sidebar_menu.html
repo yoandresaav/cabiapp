@@ -30,12 +30,7 @@
                             {% endif %}
                     </li>
                     
-                    <li>
-                        <a href="table.html">
-                            <i class="fas fa-table"></i>Placas <span class="badge badge-primary">0</span>
-                        </a>
-                    </li>
-                    <li>
+                    <li class="{% if active_link == 'ver_reportes_mios' %}active{% endif %}" >
                         <a href="{% url 'web_site:ver_mis_reportes_page' %}">
                             <i class="far fa-check-square"></i>Ver tus reportes</a>
                     </li>
@@ -48,7 +43,12 @@
                     </li>
                     {% endif %}
                     {% if false %}
-                        <li>
+                    <li>
+                        <a href="table.html">
+                            <i class="fas fa-table"></i>Placas <span class="badge badge-primary">0</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="#">
                             <i class="fas fa-calendar-alt"></i>Calendar</a>
                     </li>
