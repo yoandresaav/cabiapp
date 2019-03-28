@@ -26,6 +26,17 @@ LOGGING = {
 			'filename':'logs/InfoLoggers.log',
 			'formatter':'large',
 		},
+		'proj_log_file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': str(LOGFILE_ROOT / 'project.log'),
+            'formatter': 'verbose'
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        }
 	},
 	'loggers':{
 		'error_logger':{
@@ -38,5 +49,9 @@ LOGGING = {
 			'level':'INFO',
 			'propagate':False,
 		},
+		'project': {
+            'handlers': ['proj_log_file'],
+            'level': 'DEBUG',
+        },
 	},
 }
