@@ -206,9 +206,7 @@ if not os.path.exists(INFO_LOG_FILE):
     file.close()
 
 # importing logger settings
-try:
-    from .logger_settings import *
-except Exception:
-    # in case of any error, pass silently.
-    pass
+
+from .logger_settings import *
+
     

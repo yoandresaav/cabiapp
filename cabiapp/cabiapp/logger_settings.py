@@ -12,7 +12,7 @@ LOGGING = {
 	'handlers':{
 		'errors_file':{
 			'level':'ERROR',
-		       'class':'logging.handlers.TimedRotatingFileHandler',
+		    'class':'logging.handlers.TimedRotatingFileHandler',
 			'when':'midnight',
 			'interval':1,
 			'filename':'logs/ErrorLoggers.log',
@@ -20,7 +20,7 @@ LOGGING = {
 		},
 		'info_file':{
 			'level':'INFO',
-		       'class':'logging.handlers.TimedRotatingFileHandler',
+		    'class':'logging.handlers.TimedRotatingFileHandler',
 			'when':'midnight',
 			'interval':1,
 			'filename':'logs/InfoLoggers.log',
@@ -29,14 +29,9 @@ LOGGING = {
 		'proj_log_file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'logs/project.log'),
-            'formatter': 'verbose'
+            'filename': 'logs/Project.log',
+            'formatter': 'large'
         },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
-        }
 	},
 	'loggers':{
 		'error_logger':{
