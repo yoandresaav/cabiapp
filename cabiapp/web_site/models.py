@@ -74,7 +74,7 @@ class ReporteProductividad(models.Model):
 
     gasolina_dia = models.PositiveIntegerField(
         'Monto de Gasolina del día', default=0,
-        validators=[MaxValueValidator(999)]
+        validators=[MaxValueValidator(1200)]
     )
 
     kilometros_dia = models.PositiveIntegerField(

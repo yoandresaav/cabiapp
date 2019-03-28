@@ -21,6 +21,7 @@ from django.utils.http import urlsafe_base64_decode
 
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.views import PasswordResetView
+from django.core.mail import send_mail
 
 from .models import ReporteProductividad
 from .forms import UserCreationWithEmailForm, CabiappPasswordResetForm
@@ -42,9 +43,37 @@ class ReporteCreateView(LoginRequiredMixin, CreateView):
     )
 
     def form_valid(self, form):
+        user = self.request.user
         self.object = form.save(commit=False)
-        self.object.user = self.request.user
+        self.object.user = user
         self.object.save()
+
+        # send mail
+        asunto = 'Nuevo reporte de {0}'.format(user)
+        mensaje = 'Usuario: {0}\n'.format(user)
+        
+        if hasattr(self.object, 'placa'): 
+            mensaje += 'Placa: {0}\n'.format(self.object.placa)
+        
+        if hasattr(self.object, 'numero_viajes'):
+            mensaje += 'Viajes: {0}\n'.format(self.object.numero_viajes)
+        
+        if hasattr(self.object, 'horas_conexion'):
+            mensaje += 'Horas: {0}\n'.format(self.object.horas_conexion)
+        
+        if hasattr(self.object, 'total_facturado'):
+            mensaje += 'Total facturado: {0}\n'.format(self.object.total_facturado)
+
+        send_mail(
+            asunto,
+            mensaje,
+            'sitio@cabifleet.com',
+            ['rhina_57@hotmail.com'],
+            fail_silently=False,
+        )
+
+
+
         return super().form_valid(form)
 
 class CreateAccountsView(CreateView):
