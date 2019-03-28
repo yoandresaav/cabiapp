@@ -130,6 +130,10 @@ class SuperAdminView(LoginRequiredMixin, ListView):
         'placa', 'user'
     ).all()
 
+class SuperVerUsers(LoginRequiredMixin, ListView):
+    template_name = 'web_site/admin_all_user.html'
+    model = User
+
 
 def activate(request, uidb64, token):
     try:

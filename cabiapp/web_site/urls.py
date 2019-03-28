@@ -4,7 +4,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from .views import (
     ReporteCreateView, ThanksView, SuperAdminView, 
     CreateAccountsView, activate, CabiAppPasswordResetView,
-    VerMisReportesView
+    VerMisReportesView, SuperVerUsers
 )
 
 app_name = 'web_site'
@@ -53,5 +53,11 @@ urlpatterns = [
         'check/view/reporte/',
         staff_member_required(SuperAdminView.as_view()),
         name='admin_page_reporte'
+    ), # admin worker, no staff
+    
+    path(
+        'check/view/users/',
+        staff_member_required(SuperVerUsers.as_view()),
+        name='admin_page_users'
     ), # admin worker, no staff
 ]
