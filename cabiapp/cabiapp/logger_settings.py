@@ -4,7 +4,10 @@ LOGGING = {
 	'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
-        }
+        },
+		'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
     },
 	'formatters':{
 		'large':{
@@ -19,6 +22,16 @@ LOGGING = {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
+        },
+		'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false'],
+            'include_html': True,
+        },
+		'null': {
+            'class': 'logging.NullHandler',
+            'filters': ['require_debug_false'],
         },
 		'errors_file':{
 			'level':'ERROR',
@@ -45,7 +58,18 @@ LOGGING = {
 		'error_logger':{
 			'handlers':['console', 'errors_file', 'info_file', 'proj_log_file'],
 			'level':'DEBUG',
-			'propagate':True,
-		}
+			'propagate':False,
+		},
+		# Don't send invalid host error messages to ADMINS.
+        # https://docs.djangoproject.com/en/dev/topics/logging/#django-security
+        'django.security.DisallowedHost': {
+            'handlers': ['null'],
+            'propagate': False,
+        },
+        'admins': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
 	},
 }
