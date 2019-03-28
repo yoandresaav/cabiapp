@@ -10,7 +10,7 @@
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
                     <li class="{% if active_link == 'reportar' %}active{% endif %} has-sub">
-                        <a class="js-arrow" href="{% url 'web_site:createreporte_page' %}">
+                        <a href="{% url 'web_site:createreporte_page' %}">
                             <i class="fas fa-tachometer-alt"></i>Reportar</a>
                             {% if false %}
                             <ul class="list-unstyled navbar__sub-list js-sub-list">

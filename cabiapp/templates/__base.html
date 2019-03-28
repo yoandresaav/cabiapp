@@ -32,12 +32,11 @@
 
     <!-- Main CSS-->
     <link href="{% static 'assets/css/theme.css' %}" rel="stylesheet" media="all">
-
-    
+   
     {% block styles %}     
     {% endblock styles %}      
   </head>
-  <body class="animsition">
+  <body >
     <div class="page-wrapper">
     
       {% block header %}
@@ -97,7 +96,7 @@
       <script src="{% static '/assets/vendor/select2/select2.min.js' %}"></script>
 
       <!-- Main JS-->
-      <script src="{% static '/assets/js/main.js' %}"></script>
+      <script src="{% static '/assets/js/main.js' %}?v1"></script>
       
       {% block scripts %}       
       {% endblock scripts %}

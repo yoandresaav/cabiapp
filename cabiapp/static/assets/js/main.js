@@ -1255,7 +1255,9 @@
 (function ($) {
     // USE STRICT
     "use strict";
-    $(".animsition").animsition({
+   
+    /*{
+    $(".animsition").animsition(
       inClass: 'fade-in',
       outClass: 'fade-out',
       inDuration: 400,
@@ -1275,7 +1277,9 @@
       transition: function (url) {
         window.location.href = url;
       }
-    });
+      );
+    }*/
+    
   
   
   })(jQuery);
@@ -1577,22 +1581,7 @@
     });
  
 
-  // Sublist Sidebar
-  try {
-    var arrow = $('.js-arrow');
-    arrow.each(function () {
-      var that = $(this);
-      that.on('click', function (e) {
-        e.preventDefault();
-        that.find(".arrow").toggleClass("up");
-        that.toggleClass("open");
-        that.parent().find('.js-sub-list').slideToggle("250");
-      });
-    });
-
-  } catch (error) {
-    console.log(error);
-  }
+  // Sublist Sideba
 
 
   try {
