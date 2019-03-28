@@ -29,7 +29,7 @@ LOGGING = {
 		'proj_log_file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': str(LOGFILE_ROOT / 'project.log'),
+            'filename': 'logs/project.log'),
             'formatter': 'verbose'
         },
         'console': {
@@ -52,6 +52,7 @@ LOGGING = {
 		'project': {
             'handlers': ['proj_log_file'],
             'level': 'DEBUG',
+			'propagate': True,
         },
 	},
 }
