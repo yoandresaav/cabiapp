@@ -54,10 +54,9 @@ LOGGING = {
             'formatter': 'large'
         },
 	},
-	'':{
+	'loggers':{
 		'error_logger':{
-			'handlers':['console', 'errors_file', 'info_file', 'proj_log_file'],
-			'level':'DEBUG',
+			'handlers':['console'],
 			'propagate':False,
 		},
 		# Don't send invalid host error messages to ADMINS.
