@@ -18,6 +18,7 @@ class ReporteProductividadAdmin(admin.ModelAdmin):
         'placa',
         'dia',
         'numero_viajes',
+        'total_facturado',
         'horas_conexion',
         'monto_facturado_cabify',
         'monto_facturado_didi',
