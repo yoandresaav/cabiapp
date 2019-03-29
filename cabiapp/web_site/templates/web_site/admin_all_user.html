@@ -39,6 +39,8 @@
                             <tr>
                                 <th>Usuario</th>
                                 <th>Email</th>
+                                <th>Creado</th>
+                                <th>Last login</th>
                                 <th>Password</th>
                             </tr>
                         </thead>
@@ -47,6 +49,8 @@
                             <tr>
                                 <td>{{object}}</td>
                                 <td class="text-center">{{object.email}}</td>
+                                <td class="text-center">{{object.date_joined}}</td>
+                                <td class="text-center">{{object.last_login|default_if_none:'No login'}}</td>
                                 <td class="text-center">{{object.password}}</td>
                             </tr>
                             {% endfor %}
@@ -55,6 +59,8 @@
                             <tr>
                                 <th>Usuario</th>
                                 <th>Email</th>
+                                <th>Creado</th>
+                                <th>Last login</th>
                                 <th>Password</th>
                             </tr>
                         </tfoot>

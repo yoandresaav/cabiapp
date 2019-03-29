@@ -133,6 +133,7 @@ class SuperAdminView(LoginRequiredMixin, ListView):
 class SuperVerUsers(LoginRequiredMixin, ListView):
     template_name = 'web_site/admin_all_user.html'
     model = User
+    queryset = User.objects.all().order_by('-date_joined')
 
 
 def activate(request, uidb64, token):
