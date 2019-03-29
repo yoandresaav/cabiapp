@@ -125,7 +125,6 @@ class ThanksView(LoginRequiredMixin, TemplateView):
 class SuperAdminView(LoginRequiredMixin, ListView):
     # Admin. Ver todos los reportes
     template_name = 'web_site/admin_all_report.html'
-    model = ReporteProductividad
     queryset = ReporteProductividad.objects.select_related(
         'placa', 'user'
     ).all()

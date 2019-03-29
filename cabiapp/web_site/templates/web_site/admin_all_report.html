@@ -38,7 +38,7 @@
                         <thead>
                             <tr>
                                 <th>Placa</th>
-                                <th>Usuario</th>
+                                <th class="text-center">Usuario/ <br> Reportado </th>
                                 <th>Día</th>
                                 <th>Total</th>
                                 <th>Cabify</th>
@@ -47,13 +47,17 @@
                                 <th>Beat</th>
                                 <th>Gasolina</th>
                                 <th>Km/día</th>
+                                <th>Creado</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for reporte in object_list %}
                             <tr>
                                 <td>{{reporte.placa}}</td>
-                                <td class="text-center">{{reporte.user}}</td>
+                                <td class="text-center">
+                                    {{reporte.user}}  <br>
+                                    {{reporte.create}}
+                                </td>
                                 <td class="text-center">{{reporte.dia}}</td>
                                 <td class="text-center">{{reporte.total_facturado}}</td>
                                 <td class="text-center">{{reporte.monto_facturado_cabify}}</td>
@@ -62,13 +66,14 @@
                                 <td class="text-center">{{reporte.monto_facturado_beat}}</td>
                                 <td class="text-center">{{reporte.gasolina_dia}}</td>
                                 <td class="text-center">{{reporte.kilometros_dia}}</td>
+                                <td class="text-center">{{reporte.create}}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th>Placa</th>
-                                <th>Usuario</th>
+                                <th class="text-center">Usuario/ <br> Reportado </th>
                                 <th>Día</th>
                                 <th>Total</th>
                                 <th>Cabify</th>
@@ -77,6 +82,7 @@
                                 <th>Beat</th>
                                 <th>Gasolina</th>
                                 <th>Km/día</th>
+                                <th>Creado</th>
                             </tr>
                         </tfoot>
                     </table>
