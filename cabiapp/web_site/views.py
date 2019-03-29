@@ -172,4 +172,6 @@ class VerMisReportesView(LoginRequiredMixin, ListView):
     
     def get_queryset(self):
         user = self.request.user
-        return user.reportes.all()
+        return user.reportes.select_related(
+            'placa'
+        ).all()
