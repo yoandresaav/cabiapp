@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
@@ -44,6 +45,7 @@ class ReporteProductividad(models.Model):
 
     placa = models.ForeignKey(Placa, on_delete=models.SET_NULL, null=True)
     dia = models.CharField('Día que reporta', max_length=10, choices=DIAS_REPORTE)
+    fecha_reporte = models.DateField('Fecha que reporta')
 
     numero_viajes = models.PositiveIntegerField('Cantidad de Viajes Totales del Día', default=0)
     horas_conexion = models.PositiveIntegerField(

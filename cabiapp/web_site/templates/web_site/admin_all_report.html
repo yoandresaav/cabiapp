@@ -8,17 +8,17 @@
 
 {% block styles %}
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" >
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" >
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css" >
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.4/css/buttons.jqueryui.min.css" >
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" >
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.jqueryui.min.css" >
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css" >
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.4/css/buttons.jqueryui.min.css" >
 
-<style>
-    #example {
-        padding-top: 10px !important;
-        border: none;
-    }
-</style>
+    <style>
+        #example {
+            padding-top: 10px !important;
+            border: none;
+        }
+    </style>
 
 {% endblock styles %}
     
@@ -40,6 +40,7 @@
                                 <th>Placa</th>
                                 <th class="text-center">Usuario</th>
                                 <th>Día</th>
+                                <th>Fecha</th>
                                 <th>Total</th>
                                 <th>Cabify</th>
                                 <th>Didi</th>
@@ -55,9 +56,9 @@
                                 <td>{{reporte.placa}}</td>
                                 <td class="text-center">
                                     {{reporte.user}}  <br>
-                     
                                 </td>
                                 <td class="text-center">{{reporte.dia}}</td>
+                                <td class="text-center">{{reporte.fecha_reporte|date:'d/m/Y'}}</td>
                                 <td class="text-center">{{reporte.total_facturado}}</td>
                                 <td class="text-center">{{reporte.monto_facturado_cabify}}</td>
                                 <td class="text-center">{{reporte.monto_facturado_didi}}</td>
@@ -73,6 +74,7 @@
                                 <th>Placa</th>
                                 <th class="text-center">Usuario </th>
                                 <th>Día</th>
+                                <th>Fecha</th>
                                 <th>Total</th>
                                 <th>Cabify</th>
                                 <th>Didi</th>

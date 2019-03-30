@@ -37,7 +37,7 @@ class ReporteCreateView(LoginRequiredMixin, CreateView):
 
 
     fields = (
-        'placa', 'dia', 'numero_viajes', 'horas_conexion',
+        'placa', 'fecha_reporte', 'numero_viajes', 'horas_conexion',
         'monto_facturado_cabify', 'monto_facturado_didi', 'monto_facturado_uber', 'monto_facturado_beat',
         'gasolina_dia', 'kilometros_dia'
     )

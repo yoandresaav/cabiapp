@@ -1,9 +1,14 @@
 {% extends '__base.html' %}
+{% load static %}
 
 {% load crispy_forms_tags %}
 
+{% block styles %}
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{% endblock styles %}
+
 {% block sidebar %}
-{% include '__sidebar_menu.html' with active_link='reportar' %}
+  {% include '__sidebar_menu.html' with active_link='reportar' %}
 {% endblock sidebar %}
 
 
@@ -30,4 +35,24 @@
     </div><!--END col-md-12-->
   </div><!--END row-->
 {% endblock content %}
-    
+
+{% block scripts %}
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- <script type="text/javascript" src="{% static 'assets/js/date.js' %}"></script> -->
+  <script>
+      $( function() {
+
+          let input_picker = $( "#id_fecha_reporte" );
+          input_picker.datepicker({
+            dateFormat: "yy-mm-dd"
+          })
+          .attr('readonly', 'readonly')
+          .css('background-color', '#fff');
+
+          //let date_str = input_picker.val().toString();
+          //let resp_date = Date.parse( date_str ).toString("yyyy-MM-dd");
+          //input_picker.val(resp_date);
+          
+      } );
+  </script>
+{% endblock scripts %}
