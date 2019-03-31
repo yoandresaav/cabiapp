@@ -52,6 +52,9 @@ class ReporteCreateView(LoginRequiredMixin, CreateView):
         asunto = 'Nuevo reporte de {0}'.format(user)
         mensaje = 'Usuario: {0}\n'.format(user)
         
+        if hasattr(self.object, 'fecha_reporte'): 
+            mensaje += 'fecha_reporte: {0}\n'.format(self.object.fecha_reporte.strftime("%d-%m-%Y"))
+
         if hasattr(self.object, 'placa'): 
             mensaje += 'Placa: {0}\n'.format(self.object.placa)
         
