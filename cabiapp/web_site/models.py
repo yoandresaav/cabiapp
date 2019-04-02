@@ -89,7 +89,7 @@ class ReporteProductividad(models.Model):
 
     class Meta:
         verbose_name_plural = 'ReportesProductividades'
-        ordering = ('-create',)
+        ordering = ('-fecha_reporte',)
 
     def __str__(self):
         return '{0} + {1}'.format(self.placa, self.dia)
