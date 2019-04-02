@@ -47,7 +47,11 @@ class ReporteProductividad(models.Model):
     dia = models.CharField('Día que reporta', max_length=10, choices=DIAS_REPORTE)
     fecha_reporte = models.DateField('Fecha que reporta')
 
-    numero_viajes = models.PositiveIntegerField('Cantidad de Viajes Totales del Día', default=0)
+    numero_viajes = models.PositiveIntegerField(
+        'Cantidad de Viajes Totales del Día', default=0,
+        validators=[MaxValueValidator(20)]
+    )
+
     horas_conexion = models.PositiveIntegerField(
         'Horas de Conexión', default=0, validators=[MaxValueValidator(24)],
     )

@@ -53,6 +53,7 @@ class ReporteCreateView(LoginRequiredMixin, CreateView):
         mensaje = 'Usuario: {0}\n'.format(user)
         
         if hasattr(self.object, 'fecha_reporte'): 
+            mensaje += 'Dia del reporte: {0}\n'.format(self.object.fecha_reporte.strftime("%A"))
             mensaje += 'fecha_reporte: {0}\n'.format(self.object.fecha_reporte.strftime("%d-%m-%Y"))
 
         if hasattr(self.object, 'placa'): 
@@ -71,7 +72,7 @@ class ReporteCreateView(LoginRequiredMixin, CreateView):
             asunto,
             mensaje,
             'sitio@cabifleet.com',
-            ['rhina_57@hotmail.com'],
+            ['rhinasaldana57@gmail.com'],
             fail_silently=False,
         )
 
