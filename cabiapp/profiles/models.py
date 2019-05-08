@@ -19,3 +19,11 @@ def update_user_profile(sender, instance, created, **kwargs):
             user=instance
         )
     instance.profile.save()
+
+class CarProfile(models.Model):
+    vehicle =  models.CharField("Vehiculo", max_length=80)
+    phone = models.CharField("Teléfono", max_length=20)
+    user = models.ForeignKey(Profile, on_delete=models.SET_NULL, blank=True, null=True)
+
+    def __str__(self):
+        return '{0} - {1}'.format(self.vehicle, self.phone)

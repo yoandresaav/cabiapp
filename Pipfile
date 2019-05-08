@@ -11,6 +11,8 @@ django-extensions = "*"
 django-debug-toolbar = "*"
 django-crispy-forms = "*"
 requests = "*"
+django-celery = "*"
+redis = "==2.10.3"
 
 [requires]
 python_version = "3.7"
