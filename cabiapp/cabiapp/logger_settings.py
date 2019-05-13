@@ -18,7 +18,7 @@ LOGGING = {
 		}
 	},
 	'handlers':{
-		 # Send all messages to console
+		# Send all messages to console
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
