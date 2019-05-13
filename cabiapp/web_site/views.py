@@ -174,6 +174,13 @@ class VerMisReportesView(LoginRequiredMixin, ListView):
     # model = ReporteProductividad
     
     def get_queryset(self):
+        from .tasks import send_feedback_email_task
+        print('Haciendo de bobo')
+        try:
+            send_feedback_email_task.delay("yoandre@gmail.com", "Hola mundo celery")
+        except Exception as error:
+            print('Error al enviar el correo: {0}'.format(error))
+
         user = self.request.user
         return user.reportes.select_related(
             'placa'

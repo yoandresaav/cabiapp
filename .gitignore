@@ -5,3 +5,6 @@ __pycache__
 production.cfg
 *.log
 logs
+venv
+env
+celerybeat-schedule
