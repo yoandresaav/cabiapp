@@ -19,6 +19,5 @@ class ProfileEditView(UpdateView):
 
     def get_success_url(self):
         slug = self.request.user.profile.slug
-        url = reverse_lazy('profiles:profile_show_page', kwargs={'slug':slug})
+        url = reverse_lazy('profiles:profile_show_page', kwargs={'slug': slug})
         return str(url)  # success_url may be lazy
-

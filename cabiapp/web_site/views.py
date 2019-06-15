@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse, reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.views.generic import CreateView, TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.template.loader import render_to_string
@@ -192,3 +192,14 @@ class VerMisReportesView(LoginRequiredMixin, ListView):
         return user.reportes.select_related(
             'placa'
         ).all()
+
+def username_check(request):
+    if not request.method == 'POST' and request.is_ajax():
+        raise Exception('Bad request')
+    
+    username = request.POST.get('username', '')
+    if not username:
+        raise Exception('No send username')
+    
+    u = User.objects.filter(username=username).first()
+    return JsonResponse({'exists': u != None})

@@ -49,6 +49,11 @@ class UserCreationWithEmailForm(UserCreationForm):
                 ('Falló la validación del Captcha.'), code='invalid',
             )
     
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError('El usuario {username} ya existe'.format(username=username)) 
+        return username
     
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -63,7 +68,10 @@ class UserCreationWithEmailForm(UserCreationForm):
         user.password = self.cleaned_data["password1"]
         user.is_active=False
         if commit:
-            user.save()
+            try:
+                user.save()
+            except:
+                return None
             return user
         return None
 

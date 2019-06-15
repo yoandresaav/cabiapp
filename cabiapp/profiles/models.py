@@ -1,9 +1,11 @@
 import uuid
 
 from django.db import models
-from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,)
@@ -21,7 +23,7 @@ def update_user_profile(sender, instance, created, **kwargs):
     instance.profile.save()
 
 class CarProfile(models.Model):
-    vehicle =  models.CharField("Vehiculo", max_length=80)
+    vehicle = models.CharField("Vehiculo", max_length=80)
     phone = models.CharField("Teléfono", max_length=20)
     user = models.ForeignKey(Profile, on_delete=models.SET_NULL, blank=True, null=True)
 

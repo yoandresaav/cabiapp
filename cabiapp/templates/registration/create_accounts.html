@@ -13,14 +13,14 @@
             </a>
     <h3 class="display-5 pb-3">Crear Cuenta</h3>
     <div class="info-form">
-        <form method="post" class="form-inlin justify-content-center" style="width: 340px;margin:0 auto">
+        <form id="form_create_user" method="post" class="form-inlin justify-content-center" style="width: 340px;margin:0 auto">
                 {% csrf_token %}
                 {{ form|crispy }}
             
             <div class="text-center">
                 <div class="g-recaptcha d-inline-block" data-sitekey="6Ld7hpcUAAAAAKBsJ1LeaQ6ulVsTsVEWtWbEDYh7"></div>
             </div>
-            <button type="submit" class="btn btn-block btn-success ">Crear cuenta</button>
+            <button id="btn-create-account" type="submit" class="btn btn-block btn-success ">Crear cuenta</button>
             <br>
             <p><a class="btn btn-sm btn-light"  href="{% url 'web_site:createreporte_page' %}">Regresar</a></p>
             
@@ -32,6 +32,7 @@
 
 {% block scripts %}
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js"></script>
 <script>
     $( document ).ready(function() {
         $('#id_username').attr('placeholder', 'Usuario');
@@ -62,9 +63,42 @@
 
         $('#hint_id_password2').removeClass("text-muted");
         $('#hint_id_password2').addClass("text-white");
+
+        $("#btn-create-account").click(function(e){
+            e.preventDefault();
+            console.log("click");
+            existUsers();
+        });
+
+        function existUsers(){
+            let csrfmiddlewaretoken = $("input[name=csrfmiddlewaretoken]").val();
+            let username = $('#id_username').val();
+            let url = "{% url 'web_site:username_check' %}"; // never use this code, add in html and get
+            let data = { username, csrfmiddlewaretoken };
+
+            $.post(url, data)
+            .done((data)=>{
+                if (data.exists === true){
+                    //mensaje de error
+                    console.log("Erroro");
+                    $('#id_username').css('border-color', 'red');
+                    $('#id_username').focus();
+                    $.notify("El nombre " + username + " ya existe!");
+                    setTimeout(function(){
+                        $('#id_username').css('border-color', '')
+                    }, 2500);
+                } else {
+                    $("#form_create_user").submit();
+                }
+            })
+            .fail((error)=>{
+                $.notify("Actualmente tenemos un error!");
+            })
+        }
+
     });
 </script>
 {% endblock scripts %}
-                  
+
 
 
