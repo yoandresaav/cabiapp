@@ -64,7 +64,8 @@ class UserCreationWithEmailForm(UserCreationForm):
         user.is_active=False
         if commit:
             user.save()
-        return user
+            return user
+        return None
 
 
 class CabiappPasswordResetForm(PasswordResetForm):

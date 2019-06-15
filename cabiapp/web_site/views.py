@@ -29,6 +29,14 @@ from .tokens import account_activation_token
 
 User = get_user_model()
 
+
+def create_secure_uid(pk: str):
+    try:
+        return urlsafe_base64_encode(force_bytes(pk)).decode()
+    except:
+        return urlsafe_base64_encode(force_bytes(pk))
+
+
 class ReporteCreateView(LoginRequiredMixin, CreateView):
     # Page report after login
     template_name = 'web_site/home.html'
@@ -93,15 +101,14 @@ class CreateAccountsView(CreateView):
 
             # create new user
             if user is not None:
-                current_site = get_current_site(request)
-                subject = 'Activando tu cuenta en CabiFleet'
                 message = render_to_string('registration/account_activation_email.html', {
                     'user': user,
-                    'domain':current_site.domain,
-                    'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+                    'uid': create_secure_uid(user.pk),
                     'token': account_activation_token.make_token(user),
+                    'domain':get_current_site(request).domain,
                 })
                 # Enviar correo de que  se creo el usuario
+                subject = 'Activando tu cuenta en CabiFleet'
                 try:
                     user.email_user(subject, message)
                     messages.success(request, 'Te hemos enviado un correo con el link de activación de tu cuenta')
