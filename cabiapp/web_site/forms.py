@@ -66,7 +66,7 @@ class UserCreationWithEmailForm(UserCreationForm):
         user.email = self.cleaned_data["email"]
         # user.set_password(user.password) # set password properly before commit
         user.password = self.cleaned_data["password1"]
-        user.is_active=False
+        user.is_active=True
         if commit:
             try:
                 user.save()
