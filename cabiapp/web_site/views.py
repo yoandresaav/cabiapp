@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse, reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.views.generic import CreateView, TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.template.loader import render_to_string
@@ -28,6 +28,14 @@ from .forms import UserCreationWithEmailForm, CabiappPasswordResetForm
 from .tokens import account_activation_token
 
 User = get_user_model()
+
+
+def create_secure_uid(pk: str):
+    try:
+        return urlsafe_base64_encode(force_bytes(pk)).decode()
+    except:
+        return urlsafe_base64_encode(force_bytes(pk))
+
 
 class ReporteCreateView(LoginRequiredMixin, CreateView):
     # Page report after login
@@ -93,15 +101,14 @@ class CreateAccountsView(CreateView):
 
             # create new user
             if user is not None:
-                current_site = get_current_site(request)
-                subject = 'Activando tu cuenta en CabiFleet'
                 message = render_to_string('registration/account_activation_email.html', {
                     'user': user,
-                    'domain':current_site.domain,
-                    'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+                    'uid': create_secure_uid(user.pk),
                     'token': account_activation_token.make_token(user),
+                    'domain':get_current_site(request).domain,
                 })
                 # Enviar correo de que  se creo el usuario
+                subject = 'Activando tu cuenta en CabiFleet'
                 try:
                     user.email_user(subject, message)
                     messages.success(request, 'Te hemos enviado un correo con el link de activación de tu cuenta')
@@ -185,3 +192,14 @@ class VerMisReportesView(LoginRequiredMixin, ListView):
         return user.reportes.select_related(
             'placa'
         ).all()
+
+def username_check(request):
+    if not request.method == 'POST' and request.is_ajax():
+        raise Exception('Bad request')
+    
+    username = request.POST.get('username', '')
+    if not username:
+        raise Exception('No send username')
+    
+    u = User.objects.filter(username=username).first()
+    return JsonResponse({'exists': u != None})

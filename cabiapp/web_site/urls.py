@@ -4,7 +4,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from .views import (
     ReporteCreateView, ThanksView, SuperAdminView, 
     CreateAccountsView, activate, CabiAppPasswordResetView,
-    VerMisReportesView, SuperVerUsers
+    VerMisReportesView, SuperVerUsers,
+    username_check,
 )
 
 app_name = 'web_site'
@@ -17,7 +18,7 @@ urlpatterns = [
     ),
 
     path(
-        'ver/mis/reportes/', 
+        'ver/mis/reportes/',
         VerMisReportesView.as_view(),
         name='ver_mis_reportes_page'
     ),
@@ -37,7 +38,7 @@ urlpatterns = [
     ),
 
     path(
-        'thanks/', 
+        'thanks/',
         ThanksView.as_view(),
         name='thanks_page'
     ),
@@ -45,6 +46,12 @@ urlpatterns = [
     re_path(
         r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         activate, name='activate'
+    ),
+
+    path(
+        'username/check/',
+        username_check,
+        name='username_check'
     ),
 
     ### Admin functions
