@@ -56,6 +56,11 @@ class ReporteProductividad(models.Model):
         'Horas de Conexión', default=0, validators=[MaxValueValidator(24)],
     )
 
+    cobros_efectivo = models.PositiveIntegerField(
+        'Cobros en Efectivo (sin decimales)', default=0,
+        validators=[MaxValueValidator(3000)]
+    )
+
     monto_facturado_cabify = models.PositiveIntegerField(
         'Facturación Cabify (sin bonos, sin decimales)', default=0,
         validators=[MaxValueValidator(3000)]
@@ -102,7 +107,9 @@ class ReporteProductividad(models.Model):
 @receiver(post_save, sender=ReporteProductividad)
 def save_reporte_productividad(sender, instance, created, **kwargs):
     total = (
-        instance.monto_facturado_beat + instance.monto_facturado_cabify + instance.monto_facturado_didi + instance.monto_facturado_uber
+        instance.monto_facturado_beat + instance.monto_facturado_cabify + \
+        instance.monto_facturado_didi + instance.monto_facturado_uber + \
+        instance.cobros_efectivo
     )
     if instance.total_facturado != total:
         instance.total_facturado = total

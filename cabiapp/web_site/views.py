@@ -1,6 +1,3 @@
-import logging
-
-from django import forms
 from django.shortcuts import render, redirect
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -46,8 +43,8 @@ class ReporteCreateView(LoginRequiredMixin, CreateView):
 
     fields = (
         'placa', 'fecha_reporte', 'numero_viajes', 'horas_conexion',
-        'monto_facturado_cabify', 'monto_facturado_didi', 'monto_facturado_uber', 'monto_facturado_beat',
-        'gasolina_dia', 'kilometros_dia'
+        'cobros_efectivo', 'monto_facturado_cabify', 'monto_facturado_didi', 
+        'monto_facturado_uber', 'monto_facturado_beat', 'gasolina_dia', 'kilometros_dia'
     )
 
     def form_valid(self, form):
@@ -55,24 +52,20 @@ class ReporteCreateView(LoginRequiredMixin, CreateView):
         self.object = form.save(commit=False)
         self.object.user = user
         self.object.save()
-
         # send mail
         asunto = 'Nuevo reporte de {0}'.format(user)
         mensaje = 'Usuario: {0}\n'.format(user)
-        
         if hasattr(self.object, 'fecha_reporte'): 
             mensaje += 'Dia del reporte: {0}\n'.format(self.object.fecha_reporte.strftime("%A"))
             mensaje += 'fecha_reporte: {0}\n'.format(self.object.fecha_reporte.strftime("%d-%m-%Y"))
-
-        if hasattr(self.object, 'placa'): 
+        if hasattr(self.object, 'placa'):
             mensaje += 'Placa: {0}\n'.format(self.object.placa)
-        
         if hasattr(self.object, 'numero_viajes'):
             mensaje += 'Viajes: {0}\n'.format(self.object.numero_viajes)
-        
         if hasattr(self.object, 'horas_conexion'):
             mensaje += 'Horas: {0}\n'.format(self.object.horas_conexion)
-        
+        if hasattr(self.object, 'cobros_efectivo'):
+            mensaje += 'Cobros en Efectivo: {0}\n'.format(self.object.cobros_efectivo)
         if hasattr(self.object, 'total_facturado'):
             mensaje += 'Total facturado: {0}\n'.format(self.object.total_facturado)
 
@@ -183,7 +176,6 @@ class VerMisReportesView(LoginRequiredMixin, ListView):
     
     def get_queryset(self):
         from .tasks import send_feedback_email_task
-        print('Haciendo de bobo')
         try:
             send_feedback_email_task.delay("yoandre@gmail.com", "Hola mundo celery")
         except Exception as error:
