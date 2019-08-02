@@ -80,7 +80,6 @@
             .done((data)=>{
                 if (data.exists === true){
                     //mensaje de error
-                    console.log("Erroro");
                     $('#id_username').css('border-color', 'red');
                     $('#id_username').focus();
                     $.notify("El nombre " + username + " ya existe!");
