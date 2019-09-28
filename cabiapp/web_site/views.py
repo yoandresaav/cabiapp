@@ -73,7 +73,7 @@ class ReporteCreateView(LoginRequiredMixin, CreateView):
             asunto,
             mensaje,
             'sitio@cabifleet.com',
-            ['rhinasaldana57@gmail.com'],
+            ['info@cabifleet.com'],
             fail_silently=False,
         )
 
